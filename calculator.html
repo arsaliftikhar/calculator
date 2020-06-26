@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+</head>
+<body>
+<style>
+
+    body
+    {
+        font-family: Montserrat;
+    }
+    p{
+        text-align: center;
+        font-size: 18px;
+    }
+    table
+    {
+        margin: 0 auto;
+        background-color: #a5a5a5;
+        text-align: center;
+        font-size: 22px;
+        border-radius: 10px;
+        border: 1px solid black;
+        margin-top: 20px;
+    }
+    table td
+    {
+
+        padding: 10px;
+    }
+    table button
+    {
+        padding: 10px;
+        background-color: #a55d47;
+        width: 80px;
+        font-size: 22px;
+    }
+    table button:focus
+    {
+        outline: none;
+    }
+    table input
+    {
+        width: 80%;
+        padding: 15px;
+        font-size: 26px;
+        border-radius: 5px;
+        outline: black;
+        background-color: white;
+    }
+</style>
+
+<div class="main">
+     <p>
+         Press E/e for clear one digit.
+         <br>
+         Press C/c for clear all digits.
+         <br>
+         Press Enter to get final result
+     </p>
+
+    <table>
+        <tr>
+            <td colspan="4"><input disabled type="text" id="resultInput" value=""></td>
+        </tr>
+        <tr>
+            <td colspan="2">ARSAL IFTIKHAR <br> Roll No : WM2431</td>
+            <td><button onclick="backrmv()">CE</button></td>
+            <td><button onclick="rmv()">C</button></td>
+        </tr>
+        <tr>
+            <td><button class="btnValue" onclick="getValue('7');">7</button></td>
+            <td><button class="btnValue" onclick="getValue('8');">8</button></td>
+            <td><button class="btnValue" onclick="getValue('9');">9</button></td>
+            <td><button class="btnValue" onclick="getValue('/');">/</button></td>
+        </tr>
+
+        <tr>
+            <td><button class="btnValue" onclick="getValue('4');">4</button></td>
+            <td><button class="btnValue" onclick="getValue('5');">5</button></td>
+            <td><button class="btnValue" onclick="getValue('6');">6</button></td>
+            <td><button class="btnValue" onclick="getValue('*');">*</button></td>
+        </tr>
+
+        <tr>
+            <td><button class="btnValue" onclick="getValue('1');">1</button></td>
+            <td><button class="btnValue" onclick="getValue('2');">2</button></td>
+            <td><button class="btnValue" onclick="getValue('3');">3</button></td>
+            <td><button class="btnValue" onclick="getValue('+');">+</button></td>
+        </tr>
+
+        <tr>
+            <td><button class="btnValue" onclick="getValue('0');">0</button></td>
+            <td><button class="btnValue" onclick="showResult();">=</button></td>
+            <td><button class="btnValue" onclick="getValue('.');">.</button></td>
+            <td><button class="btnValue" onclick="getValue('-');">-</button></td>
+        </tr>
+    </table>
+
+
+</div>
+<script>
+
+
+   function getValue(getNumber)
+  {
+      var result = document.getElementById('resultInput');
+            result.value += getNumber;
+  }
+
+   function rmv()
+   {
+       var result = document.getElementById('resultInput');
+       result.value = "";
+   }
+   function backrmv() {
+
+       var orignialValue = document.getElementById('resultInput').value;
+      var valGetLength= orignialValue.length;
+
+      for (var i=0;i<valGetLength;i++)
+      {
+
+      }
+       var removeOneDigit = i-1;
+       var resultFinal = orignialValue.slice(0, removeOneDigit);
+         console.log(resultFinal);
+            document.getElementById('resultInput').value=resultFinal;
+
+   }
+   function showResult() {
+
+       var result = document.getElementById('resultInput');
+       result.value = eval(result.value);
+
+   }
+
+
+   document.addEventListener("keypress",function (event) {
+
+       var getKey = event.key;
+       var charVal = getKey.charCodeAt(0);
+
+       console.log(charVal);
+
+       if (getKey<48 || getKey>57 || getKey==='+' || getKey==='-' || getKey==='/' || getKey==='*' || getKey==='.')
+       {
+
+            document.getElementById('resultInput').value+=getKey;
+
+       }
+       else if (getKey==='Enter')
+       {
+           var result = document.getElementById('resultInput');
+           result.value = eval(result.value);
+       }
+       else if(getKey==='c' || getKey==='C')
+       {
+           var result = document.getElementById('resultInput');
+           result.value = "";
+       }
+       else if (getKey=='e' || getKey==='E')
+       {
+
+           var orignialValue = document.getElementById('resultInput').value;
+           var valGetLength= orignialValue.length;
+
+           for (var i=0;i<valGetLength;i++)
+           {
+
+           }
+           var removeOneDigit = i-1;
+           var resultFinal = orignialValue.slice(0, removeOneDigit);
+           console.log(resultFinal);
+           document.getElementById('resultInput').value=resultFinal;
+       }
+       else
+       {
+           alert("Please Enter Only Numbers or symbols");
+       }
+
+       console.log(event.key);
+
+   });
+
+
+
+</script>
+
+</body>
+</html>
